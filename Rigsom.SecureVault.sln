@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rigsom.SecureVault", "Rigso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rigsom.SecureVault.Frontend", "Rigsom.SecureVault.Frontend\Rigsom.SecureVault.Frontend.csproj", "{E724932E-05A7-4B44-AED6-537077BE6939}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rigsom.SecureVault.Tester", "Rigsom.SecureVault.Tester\Rigsom.SecureVault.Tester.csproj", "{B193B4CA-8014-4E9F-8F76-B34B4B425A69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E724932E-05A7-4B44-AED6-537077BE6939}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E724932E-05A7-4B44-AED6-537077BE6939}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E724932E-05A7-4B44-AED6-537077BE6939}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B193B4CA-8014-4E9F-8F76-B34B4B425A69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B193B4CA-8014-4E9F-8F76-B34B4B425A69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B193B4CA-8014-4E9F-8F76-B34B4B425A69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B193B4CA-8014-4E9F-8F76-B34B4B425A69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

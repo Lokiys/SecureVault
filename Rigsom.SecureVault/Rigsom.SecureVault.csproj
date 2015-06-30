@@ -39,8 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Cryptography\CryptoBase.cs" />
+    <Compile Include="Model\Cryptography\DataDecryptor.cs" />
+    <Compile Include="Model\Cryptography\DataEncryptor.cs" />
+    <Compile Include="Model\Cryptography\RijndaelHelper.cs" />
+    <Compile Include="Model\Util\CryptoHelper.cs" />
+    <Compile Include="Model\Util\KeyHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
