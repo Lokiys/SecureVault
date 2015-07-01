@@ -10,6 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30px" />
             <RowDefinition Height="1*" />
+            <RowDefinition Height="30px" />
             <RowDefinition Height="60px" />
             <RowDefinition Height="30px" />
         </Grid.RowDefinitions>
@@ -40,15 +41,28 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <StackPanel Grid.Column="0" Grid.Row="2">
-            <Button Command="{Binding CopyPassword}" IsEnabled="{Binding DecryptionEnabled}" CommandParameter="{Binding ElementName=SavedDataList,Path=SelectedIndex}">Copy</Button>
-            <Button Command="{Binding ShowPassword}" IsEnabled="{Binding DecryptionEnabled}" CommandParameter="{Binding ElementName=SavedDataList,Path=SelectedIndex}">Show</Button>
-        </StackPanel>
-
-        <TextBox Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding DecryptedPassword}" TextAlignment="Center" />
+        <Label Grid.Column="0" Grid.Row="2">Actions</Label>
         
-        <Rectangle Grid.Row="3" Grid.ColumnSpan="4" Fill="Gainsboro" />
-        <Label Grid.Row="3" Grid.Column="3" Content="{Binding Error}" Foreground="Red" HorizontalAlignment="Right" />
-        <Label Grid.Row="3" Grid.Column="3" Visibility="{Binding DecryptionEnabled, Converter={StaticResource visibilityConverter}}" Foreground="Green" HorizontalAlignment="Right" Content="Ready" />
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Margin="2" Command="{Binding CopyPassword}" Grid.Column="0" Grid.Row="0" IsEnabled="{Binding DecryptionEnabled}" CommandParameter="{Binding ElementName=SavedDataList,Path=SelectedIndex}">Copy Data</Button>
+            <Button Margin="2" Command="{Binding ShowPassword}" Grid.Column="0" Grid.Row="1" IsEnabled="{Binding DecryptionEnabled}" CommandParameter="{Binding ElementName=SavedDataList,Path=SelectedIndex}">Show Data</Button>
+            <Button Margin="2" Grid.Column="1" Grid.Row="0" IsEnabled="{Binding DecryptionEnabled}" CommandParameter="{Binding ElementName=SavedDataList,Path=SelectedIndex}">Delete</Button>
+            <Button Margin="2" Grid.Column="1" Grid.Row="1" IsEnabled="{Binding DecryptionEnabled}">Add</Button>
+        </Grid>
+
+        <TextBox Grid.Column="4" Grid.Row="3" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding DecryptedPassword}" TextAlignment="Center" />
+        
+        <Rectangle Grid.Row="4" Grid.ColumnSpan="4" Fill="Gainsboro" />
+        <Label Grid.Row="4" Grid.Column="3" Content="{Binding Error}" Foreground="Red" HorizontalAlignment="Right" />
+        <Label Grid.Row="4" Grid.Column="3" Visibility="{Binding DecryptionEnabled, Converter={StaticResource visibilityConverter}}" Foreground="Green" HorizontalAlignment="Right" Content="Ready" />
     </Grid>
 </Window>

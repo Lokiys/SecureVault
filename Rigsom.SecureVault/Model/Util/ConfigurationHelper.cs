@@ -113,5 +113,20 @@ namespace Rigsom.SecureVault.Model.Util
 
             return doc.Descendants("salt").First().Value;
         }
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        public void AddData(string name, string value)
+        {
+            XDocument doc = XDocument.Load(this.configurationPath);
+            XElement data = new XElement("data");
+            data.Add(new XAttribute("name", name));
+
+            doc.Element("encryptedData").Add(data);
+            doc.Save(this.configurationPath);
+        }
     }
 }
