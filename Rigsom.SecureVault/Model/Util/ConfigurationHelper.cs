@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -30,6 +31,15 @@ namespace Rigsom.SecureVault.Model.Util
         /// <summary>
         /// TODO: Comment
         /// </summary>
+        /// <returns></returns>
+        public bool CheckConfiguration()
+        {
+            return File.Exists(this.configurationPath);
+        }
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
         public void CreateConfigurationFile()
         {
             //Create Path
@@ -37,7 +47,15 @@ namespace Rigsom.SecureVault.Model.Util
             
             //Create basic configuration file
             XDocument doc = new XDocument(new XElement("configuration",
-                new XElement("masterPassword"), new XElement("encryptedData")));
+                new XElement("masterPassword"), new XElement("salt"), new XElement("encryptedData")));
+
+            //Generate random salt
+            RandomNumberGenerator rng = new RNGCryptoServiceProvider();
+            byte[] salt = new byte[16];
+            rng.GetBytes(salt);
+
+            //Save generated salt
+            doc.Descendants("salt").First().Value = Convert.ToBase64String(salt);
 
             //Save configuration file
             doc.Save(this.configurationPath);

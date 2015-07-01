@@ -9,6 +9,7 @@ using Microsoft.Practices.Prism.Commands;
 using System.IO;
 using System.Security.Cryptography;
 using Rigsom.SecureVault.Model.Util;
+using System.Windows;
 
 namespace Rigsom.SecureVault.Frontend.ViewModel
 {
@@ -76,6 +77,7 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
         /// </summary>
         public void SaveConfigurationExcecute()
         {
+            //TODO: Save path in configuration
             string configurationPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), 
                 "SecureVault", 
                 "settings",
@@ -94,6 +96,9 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
                 //Save master password
                 string passwordHash = hashHelper.ComputeHash(secureStringHelper.SecureStringToString(this.MasterPassword));
                 configHelper.SaveMasterPassword(passwordHash);
+
+                //Close the configuration window
+                Application.Current.Windows[1].Close();
             }
             else
             {
