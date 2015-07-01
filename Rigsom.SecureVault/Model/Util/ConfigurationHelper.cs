@@ -106,5 +106,16 @@ namespace Rigsom.SecureVault.Model.Util
 
             return doc.Descendants("masterPassword").First().Value;
         }
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
+        /// <returns></returns>
+        public string GetSalt()
+        {
+            XDocument doc = XDocument.Load(this.configurationPath);
+
+            return doc.Descendants("salt").First().Value;
+        }
     }
 }

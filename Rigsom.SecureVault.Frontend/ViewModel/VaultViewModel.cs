@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Rigsom.SecureVault.Frontend.ViewModel
 {
@@ -52,6 +53,34 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
         /// <summary>
         /// TODO: Comment
         /// </summary>
+        private string error;
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
+        public string Error
+        {
+            get { return error; }
+            set { error = value; NotifyPropertyChanged(); }
+        }
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
+        private string decryptedPassword;
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
+        public string DecryptedPassword
+        {
+            get { return decryptedPassword; }
+            set { decryptedPassword = value; NotifyPropertyChanged(); }
+        }
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
         public DelegateCommand Authenticate
         {
             get { return new DelegateCommand(AuthenticateExcecute); }
@@ -84,11 +113,76 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
                 }
 
                 this.SavedData = dataCollection;
+                this.Error = "";
             }
             else
             {
-                
+                this.Error = "Invalid Password";
             }
+        }
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
+        public DelegateCommand<int> CopyPassword
+        {
+            get { return new DelegateCommand<int>(CopyPasswordExcecute); }
+        }
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
+        public void CopyPasswordExcecute(int selectedID)
+        {
+            //TODO: Save path in configuration
+            string configurationPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                "SecureVault",
+                "settings",
+                "configuration.dat");
+
+            ConfigurationHelper configHelper = new ConfigurationHelper(configurationPath);
+            KeyHelper keyHelper = new KeyHelper();
+            SecureStringHelper secureStringHelper = new SecureStringHelper();
+
+            byte[] key = keyHelper.DeriveKey(secureStringHelper.SecureStringToString(this.Password), configHelper.GetSalt());
+
+            CryptoHelper cryptoHelper = new CryptoHelper(key, Convert.FromBase64String(configHelper.GetSalt()));
+
+            string decryptedValue = cryptoHelper.DecryptValue(this.SavedData[selectedID].EncryptedValue);
+
+            Clipboard.SetText(decryptedPassword);
+        }
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
+        public DelegateCommand<int> ShowPassword
+        {
+            get { return new DelegateCommand<int>(ShowPasswordExcecute); }
+        }
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
+        public void ShowPasswordExcecute(int selectedID)
+        {
+            //TODO: Save path in configuration
+            string configurationPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                "SecureVault",
+                "settings",
+                "configuration.dat");
+
+            ConfigurationHelper configHelper = new ConfigurationHelper(configurationPath);
+            KeyHelper keyHelper = new KeyHelper();
+            SecureStringHelper secureStringHelper = new SecureStringHelper();
+
+            byte[] key = keyHelper.DeriveKey(secureStringHelper.SecureStringToString(this.Password), configHelper.GetSalt());
+
+            CryptoHelper cryptoHelper = new CryptoHelper(key, Convert.FromBase64String(configHelper.GetSalt()));
+
+            string decryptedValue = cryptoHelper.DecryptValue(this.SavedData[selectedID].EncryptedValue);
+
+            this.DecryptedPassword = decryptedPassword;
         }
     }
 }
