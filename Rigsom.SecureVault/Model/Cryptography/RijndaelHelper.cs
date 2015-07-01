@@ -15,6 +15,16 @@ namespace Rigsom.SecureVault.Model.Cryptography
         /// <summary>
         /// TODO: Comment
         /// </summary>
+        private const int KEY_SIZE = 256;
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
+        private const int BLOCK_SIZE = 128;
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
         /// <param name="decrypt"></param>
         /// <param name="key"></param>
         /// <param name="salt"></param>
@@ -24,8 +34,8 @@ namespace Rigsom.SecureVault.Model.Cryptography
             using (Rfc2898DeriveBytes rfcKey = new Rfc2898DeriveBytes(Encoding.UTF8.GetString(key), salt))
             {
                 RijndaelManaged aes = new RijndaelManaged();
-                aes.KeySize = 256;
-                aes.BlockSize = 128;
+                aes.KeySize = KEY_SIZE;
+                aes.BlockSize = BLOCK_SIZE;
                 aes.Key = rfcKey.GetBytes(aes.KeySize / 8);
                 aes.IV = rfcKey.GetBytes(aes.BlockSize / 8);
                 

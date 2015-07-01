@@ -8,21 +8,31 @@ using System.Threading.Tasks;
 namespace Rigsom.SecureVault.Model.Util
 {
     /// <summary>
-    /// TODO: Comment
+    /// Responsible for the derivation of
+    /// the key
     /// </summary>
     public class KeyHelper
     {
         /// <summary>
-        /// TODO: Comment
+        /// Size of the Key
         /// </summary>
         private const int KEY_SIZE = 256;
+
+        /// <summary>
+        /// Number of iterations for the PBKDF2
+        /// function
+        /// </summary>
+        private const int PBKDF2_ITERATIONS = 1000;
         
         /// <summary>
-        /// TODO: Comment
+        /// Derives the key with the help of
+        /// PBKDF2
         /// </summary>
-        /// <param name="password"></param>
-        /// <param name="salt"></param>
-        /// <returns></returns>
+        /// <param name="password">Password for the
+        /// key derivation</param>
+        /// <param name="salt">Salt for the key
+        /// derivation</param>
+        /// <returns>Derived key</returns>
         public byte[] DeriveKey(string password, string salt)
         {
             byte[] convertedPassword = Encoding.UTF8.GetBytes(password);
@@ -30,16 +40,18 @@ namespace Rigsom.SecureVault.Model.Util
 
             using (DeriveBytes deriveBytes = this.CreatePBKDF2(convertedPassword, convertedSalt))
             {
-                return deriveBytes.GetBytes(256);
+                return deriveBytes.GetBytes(KEY_SIZE);
             }
         }
 
         /// <summary>
-        /// TODO Comment
+        /// Creates the PBKDF2 function
         /// </summary>
-        /// <param name="password"></param>
-        /// <param name="salt"></param>
-        /// <returns></returns>
+        /// <param name="password">Password for the
+        /// key derivation</param>
+        /// <param name="salt">Salt for the key
+        /// derivation</param>
+        /// <returns>PBKDF2 function</returns>
         private DeriveBytes CreatePBKDF2(byte[] password, byte[] salt)
         {
             if (password == null)
@@ -47,7 +59,7 @@ namespace Rigsom.SecureVault.Model.Util
             if (salt == null)
                 throw new ArgumentNullException("salt");
 
-            return new Rfc2898DeriveBytes(password, salt, 10000);
+            return new Rfc2898DeriveBytes(password, salt, PBKDF2_ITERATIONS);
         }
     }
 }

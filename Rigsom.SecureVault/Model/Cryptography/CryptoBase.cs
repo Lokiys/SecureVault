@@ -8,8 +8,14 @@ using System.Threading.Tasks;
 
 namespace Rigsom.SecureVault.Model.Cryptography
 {
+    /// <summary>
+    /// TODO: Comment
+    /// </summary>
     internal abstract class CryptoBase
     {
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
         public abstract bool decrypt { get; }
 
         /// <summary>

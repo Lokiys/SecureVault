@@ -43,8 +43,11 @@
     <Compile Include="Model\Cryptography\DataDecryptor.cs" />
     <Compile Include="Model\Cryptography\DataEncryptor.cs" />
     <Compile Include="Model\Cryptography\RijndaelHelper.cs" />
+    <Compile Include="Model\Util\ConfigurationHelper.cs" />
     <Compile Include="Model\Util\CryptoHelper.cs" />
+    <Compile Include="Model\Util\HashHelper.cs" />
     <Compile Include="Model\Util\KeyHelper.cs" />
+    <Compile Include="Model\Util\SecureStringHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
