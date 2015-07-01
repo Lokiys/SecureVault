@@ -98,7 +98,7 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
                 configHelper.SaveMasterPassword(passwordHash);
 
                 //Close the configuration window
-                Application.Current.Windows[1].Close();
+                Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive).Close();
             }
             else
             {

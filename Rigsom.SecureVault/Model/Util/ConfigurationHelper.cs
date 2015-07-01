@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -75,6 +76,35 @@ namespace Rigsom.SecureVault.Model.Util
             doc.Descendants("masterPassword").First().Value = password;
 
             doc.Save(this.configurationPath);
+        }
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Tuple<string, string>> GetAllSavedData()
+        {
+            List<Tuple<string, string>> savedData = new List<Tuple<string, string>>();
+
+            XDocument doc = XDocument.Load(this.configurationPath);
+
+            foreach (var data in doc.Descendants("data"))
+            {
+                savedData.Add(new Tuple<string, string>(data.Attribute("name").Value, data.Value));
+            }
+
+            return savedData;
+        }
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
+        /// <returns></returns>
+        public string GetPasswordHash()
+        {
+            XDocument doc = XDocument.Load(this.configurationPath);
+
+            return doc.Descendants("masterPassword").First().Value;
         }
     }
 }

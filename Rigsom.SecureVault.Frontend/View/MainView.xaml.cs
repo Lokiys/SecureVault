@@ -1,6 +1,9 @@
-﻿using Rigsom.SecureVault.Model.Util;
+﻿using Rigsom.SecureVault.Frontend.Model;
+using Rigsom.SecureVault.Frontend.ViewModel;
+using Rigsom.SecureVault.Model.Util;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +39,16 @@ namespace Rigsom.SecureVault.Frontend.View
             {
                 ConfigurationView configView = new ConfigurationView();
                 configView.ShowDialog();
+            }
+
+            this.DataContext = new VaultViewModel(new Vault());
+        }
+
+        private void Password_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            {
+                ((VaultViewModel)this.DataContext).Password = ((PasswordBox)sender).SecurePassword;
             }
         }
     }
