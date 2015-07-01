@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Rigsom.SecureVault.Model.Cryptography
 {
     /// <summary>
-    /// TODO: Comment
+    /// Base class for the text tranformation classes
     /// </summary>
     internal abstract class CryptoBase
     {

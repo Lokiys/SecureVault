@@ -75,6 +75,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Model\Configuration.cs" />
     <Compile Include="Model\SavedData.cs" />
     <Compile Include="Model\Vault.cs" />
