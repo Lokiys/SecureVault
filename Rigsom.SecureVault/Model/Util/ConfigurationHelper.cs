@@ -60,10 +60,6 @@ namespace Rigsom.SecureVault.Model.Util
 
             //Save configuration file
             doc.Save(this.configurationPath);
-
-            //Encrypt configuration file
-            //TODO: Check
-            //File.Encrypt(this.configurationPath);
         }
         
         /// <summary>

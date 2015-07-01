@@ -118,21 +118,22 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
             else
             {
                 this.Error = "Invalid Password";
+                this.SavedData = null;
             }
         }
 
         /// <summary>
         /// TODO: Comment
         /// </summary>
-        public DelegateCommand<int> CopyPassword
+        public DelegateCommand<int?> CopyPassword
         {
-            get { return new DelegateCommand<int>(CopyPasswordExcecute); }
+            get { return new DelegateCommand<int?>(CopyPasswordExcecute); }
         }
 
         /// <summary>
         /// TODO: Comment
         /// </summary>
-        public void CopyPasswordExcecute(int selectedID)
+        public void CopyPasswordExcecute(int? selectedID)
         {
             //TODO: Save path in configuration
             string configurationPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
@@ -148,23 +149,23 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
 
             CryptoHelper cryptoHelper = new CryptoHelper(key, Convert.FromBase64String(configHelper.GetSalt()));
 
-            string decryptedValue = cryptoHelper.DecryptValue(this.SavedData[selectedID].EncryptedValue);
+            string decryptedValue = cryptoHelper.DecryptValue(this.SavedData[selectedID.Value].EncryptedValue);
 
-            Clipboard.SetText(decryptedPassword);
+            Clipboard.SetText(decryptedValue);
         }
 
         /// <summary>
         /// TODO: Comment
         /// </summary>
-        public DelegateCommand<int> ShowPassword
+        public DelegateCommand<int?> ShowPassword
         {
-            get { return new DelegateCommand<int>(ShowPasswordExcecute); }
+            get { return new DelegateCommand<int?>(ShowPasswordExcecute); }
         }
 
         /// <summary>
         /// TODO: Comment
         /// </summary>
-        public void ShowPasswordExcecute(int selectedID)
+        public void ShowPasswordExcecute(int? selectedID)
         {
             //TODO: Save path in configuration
             string configurationPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
@@ -180,9 +181,9 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
 
             CryptoHelper cryptoHelper = new CryptoHelper(key, Convert.FromBase64String(configHelper.GetSalt()));
 
-            string decryptedValue = cryptoHelper.DecryptValue(this.SavedData[selectedID].EncryptedValue);
+            string decryptedValue = cryptoHelper.DecryptValue(this.SavedData[selectedID.Value].EncryptedValue);
 
-            this.DecryptedPassword = decryptedPassword;
+            this.DecryptedPassword = decryptedValue;
         }
     }
 }

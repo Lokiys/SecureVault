@@ -40,7 +40,7 @@
             <Button Command="{Binding CopyPassword}" CommandParameter="{Binding ElementName=SavedDataList,Path=SelectedIndex}">Copy</Button>
             <Button Command="{Binding ShowPassword}" CommandParameter="{Binding ElementName=SavedDataList,Path=SelectedIndex}">Show</Button>
         </StackPanel>
-        
+
         <TextBox Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding DecryptedPassword}" />
         
         <Rectangle Grid.Row="3" Grid.ColumnSpan="4" Fill="Gainsboro" />
