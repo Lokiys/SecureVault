@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Rigsom.SecureVault.Frontend.View.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Vault" Height="400" Width="600">
+        Title="Vault" Height="400" Width="600" Icon="/Rigsom.SecureVault.Frontend;component/Images/security-icon.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30px" />
@@ -21,7 +21,7 @@
 
         <Button Grid.Column="2" Grid.Row="0" Command="{Binding Authenticate}">OK</Button>
 
-        <ListBox x:Name="SavedDataList" Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding SavedData, Mode=OneWay}">
+        <ListBox x:Name="SavedDataList" Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding SavedData, Mode=OneWay}" SelectedIndex="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -37,11 +37,11 @@
         </ListBox>
 
         <StackPanel Grid.Column="0" Grid.Row="2">
-            <Button Command="{Binding CopyPassword}" CommandParameter="{Binding ElementName=SavedDataList,Path=SelectedIndex}">Copy</Button>
-            <Button Command="{Binding ShowPassword}" CommandParameter="{Binding ElementName=SavedDataList,Path=SelectedIndex}">Show</Button>
+            <Button Command="{Binding CopyPassword}" IsEnabled="{Binding DecryptionEnabled}" CommandParameter="{Binding ElementName=SavedDataList,Path=SelectedIndex}">Copy</Button>
+            <Button Command="{Binding ShowPassword}" IsEnabled="{Binding DecryptionEnabled}" CommandParameter="{Binding ElementName=SavedDataList,Path=SelectedIndex}">Show</Button>
         </StackPanel>
 
-        <TextBox Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding DecryptedPassword}" />
+        <TextBox Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding DecryptedPassword}" TextAlignment="Center" />
         
         <Rectangle Grid.Row="3" Grid.ColumnSpan="4" Fill="Gainsboro" />
         <Label Grid.Row="3" Grid.Column="3" Content="{Binding Error}" Foreground="Red" HorizontalAlignment="Right" />

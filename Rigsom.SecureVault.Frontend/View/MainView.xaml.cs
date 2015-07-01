@@ -23,6 +23,9 @@ namespace Rigsom.SecureVault.Frontend.View
     /// </summary>
     public partial class MainView : Window
     {
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
         public MainView()
         {
             InitializeComponent();
@@ -44,6 +47,11 @@ namespace Rigsom.SecureVault.Frontend.View
             this.DataContext = new VaultViewModel(new Vault());
         }
 
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Password_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (this.DataContext != null)

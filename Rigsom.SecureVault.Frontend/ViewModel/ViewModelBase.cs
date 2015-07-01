@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 namespace Rigsom.SecureVault.Frontend.ViewModel
 {
     /// <summary>
-    /// TODO: Comment
+    /// Base class for all used ViewModels
     /// </summary>
     abstract class ViewModelBase : INotifyPropertyChanged
     {
         /// <summary>
-        /// TODO: Comment
+        /// Event for changes
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// TODO: Comment
+        /// Notifies the View in case of a change
         /// </summary>
         /// <param name="propertyName"></param>
         public void NotifyPropertyChanged([CallerMemberName]string propertyName = "")

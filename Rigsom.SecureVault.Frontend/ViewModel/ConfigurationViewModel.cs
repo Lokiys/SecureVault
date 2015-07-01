@@ -14,12 +14,12 @@ using System.Windows;
 namespace Rigsom.SecureVault.Frontend.ViewModel
 {
     /// <summary>
-    /// TODO: Comment
+    /// ViewModel for the ConfigurationView
     /// </summary>
     class ConfigurationViewModel : ViewModelBase
     {
         /// <summary>
-        /// TODO: Comment
+        /// The associated model
         /// </summary>
         public Configuration Model { get; set; }
 

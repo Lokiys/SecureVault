@@ -14,12 +14,12 @@ using System.Windows;
 namespace Rigsom.SecureVault.Frontend.ViewModel
 {
     /// <summary>
-    /// TODO: Comment
+    /// ViewModel for the MainView
     /// </summary>
     class VaultViewModel : ViewModelBase
     {
         /// <summary>
-        /// TODO: Comment
+        /// The associated model
         /// </summary>
         public Vault Model { get; set; }
 
@@ -81,6 +81,20 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
         /// <summary>
         /// TODO: Comment
         /// </summary>
+        private bool decryptionEnabled;
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
+        public bool DecryptionEnabled
+        {
+            get { return decryptionEnabled; }
+            set { decryptionEnabled = value; NotifyPropertyChanged(); }
+        }
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
         public DelegateCommand Authenticate
         {
             get { return new DelegateCommand(AuthenticateExcecute); }
@@ -113,12 +127,14 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
                 }
 
                 this.SavedData = dataCollection;
-                this.Error = "";
+                this.Error = String.Empty;
+                this.DecryptionEnabled = true;
             }
             else
             {
                 this.Error = "Invalid Password";
                 this.SavedData = null;
+                this.DecryptionEnabled = false;
             }
         }
 
@@ -148,6 +164,8 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
             byte[] key = keyHelper.DeriveKey(secureStringHelper.SecureStringToString(this.Password), configHelper.GetSalt());
 
             CryptoHelper cryptoHelper = new CryptoHelper(key, Convert.FromBase64String(configHelper.GetSalt()));
+
+            selectedID = selectedID == -1 ? 0 : selectedID;
 
             string decryptedValue = cryptoHelper.DecryptValue(this.SavedData[selectedID.Value].EncryptedValue);
 
@@ -180,6 +198,8 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
             byte[] key = keyHelper.DeriveKey(secureStringHelper.SecureStringToString(this.Password), configHelper.GetSalt());
 
             CryptoHelper cryptoHelper = new CryptoHelper(key, Convert.FromBase64String(configHelper.GetSalt()));
+
+            selectedID = selectedID == -1 ? 0 : selectedID;
 
             string decryptedValue = cryptoHelper.DecryptValue(this.SavedData[selectedID.Value].EncryptedValue);
 
