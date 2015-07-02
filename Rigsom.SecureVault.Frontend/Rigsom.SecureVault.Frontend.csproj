@@ -77,9 +77,11 @@
     </ApplicationDefinition>
     <Compile Include="Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Model\Configuration.cs" />
+    <Compile Include="Model\NewData.cs" />
     <Compile Include="Model\SavedData.cs" />
     <Compile Include="Model\Vault.cs" />
     <Compile Include="ViewModel\ConfigurationViewModel.cs" />
+    <Compile Include="ViewModel\NewDataViewModel.cs" />
     <Compile Include="ViewModel\VaultViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\ConfigurationView.xaml.cs">
@@ -92,11 +94,18 @@
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\NewDataView.xaml.cs">
+      <DependentUpon>NewDataView.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\ConfigurationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\NewDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

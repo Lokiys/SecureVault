@@ -56,7 +56,7 @@
             <Button Margin="2" Command="{Binding CopyPassword}" Grid.Column="0" Grid.Row="0" IsEnabled="{Binding DecryptionEnabled}" CommandParameter="{Binding ElementName=SavedDataList,Path=SelectedIndex}">Copy Data</Button>
             <Button Margin="2" Command="{Binding ShowPassword}" Grid.Column="0" Grid.Row="1" IsEnabled="{Binding DecryptionEnabled}" CommandParameter="{Binding ElementName=SavedDataList,Path=SelectedIndex}">Show Data</Button>
             <Button Margin="2" Grid.Column="1" Grid.Row="0" IsEnabled="{Binding DecryptionEnabled}" CommandParameter="{Binding ElementName=SavedDataList,Path=SelectedIndex}">Delete</Button>
-            <Button Margin="2" Grid.Column="1" Grid.Row="1" IsEnabled="{Binding DecryptionEnabled}">Add</Button>
+            <Button Margin="2" Command="{Binding AddData}" Grid.Column="1" Grid.Row="1" IsEnabled="{Binding DecryptionEnabled}">Add</Button>
         </Grid>
 
         <TextBox Grid.Column="4" Grid.Row="3" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding DecryptedPassword}" TextAlignment="Center" />

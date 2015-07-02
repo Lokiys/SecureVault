@@ -20,5 +20,10 @@ namespace Rigsom.SecureVault.Frontend.Model
         /// TODO: Comment
         /// </summary>
         public string EncryptedValue { get; set; }
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
+        public string Salt { get; set; }
     }
 }

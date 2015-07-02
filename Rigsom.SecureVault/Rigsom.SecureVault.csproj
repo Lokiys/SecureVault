@@ -43,6 +43,7 @@
     <Compile Include="Model\Cryptography\DataDecryptor.cs" />
     <Compile Include="Model\Cryptography\DataEncryptor.cs" />
     <Compile Include="Model\Cryptography\RijndaelHelper.cs" />
+    <Compile Include="Model\Cryptography\SaltGenerator.cs" />
     <Compile Include="Model\Util\ConfigurationHelper.cs" />
     <Compile Include="Model\Util\CryptoHelper.cs" />
     <Compile Include="Model\Util\HashHelper.cs" />

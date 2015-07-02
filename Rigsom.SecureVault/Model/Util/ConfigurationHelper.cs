@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rigsom.SecureVault.Model.Cryptography;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -50,13 +51,10 @@ namespace Rigsom.SecureVault.Model.Util
             XDocument doc = new XDocument(new XElement("configuration",
                 new XElement("masterPassword"), new XElement("salt"), new XElement("encryptedData")));
 
-            //Generate random salt
-            RandomNumberGenerator rng = new RNGCryptoServiceProvider();
-            byte[] salt = new byte[16];
-            rng.GetBytes(salt);
+            SaltGenerator saltGenerator = new SaltGenerator();
 
             //Save generated salt
-            doc.Descendants("salt").First().Value = Convert.ToBase64String(salt);
+            doc.Descendants("salt").First().Value = Convert.ToBase64String(saltGenerator.GenerateSalt());
 
             //Save configuration file
             doc.Save(this.configurationPath);
@@ -78,15 +76,15 @@ namespace Rigsom.SecureVault.Model.Util
         /// TODO: Comment
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Tuple<string, string>> GetAllSavedData()
+        public IEnumerable<Tuple<string, string, string>> GetAllSavedData()
         {
-            List<Tuple<string, string>> savedData = new List<Tuple<string, string>>();
+            List<Tuple<string, string, string>> savedData = new List<Tuple<string, string, string>>();
 
             XDocument doc = XDocument.Load(this.configurationPath);
 
             foreach (var data in doc.Descendants("data"))
             {
-                savedData.Add(new Tuple<string, string>(data.Attribute("name").Value, data.Value));
+                savedData.Add(new Tuple<string, string, string>(data.Attribute("name").Value, data.Value, data.Attribute("salt").Value));
             }
 
             return savedData;
@@ -119,13 +117,14 @@ namespace Rigsom.SecureVault.Model.Util
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        public void AddData(string name, string value)
-        {
+        public void AddData(string name, string value, string salt)
+        {           
             XDocument doc = XDocument.Load(this.configurationPath);
-            XElement data = new XElement("data");
+            XElement data = new XElement("data", value);
             data.Add(new XAttribute("name", name));
+            data.Add(new XAttribute("salt", salt));
 
-            doc.Element("encryptedData").Add(data);
+            doc.Descendants("encryptedData").First().Add(data);
             doc.Save(this.configurationPath);
         }
     }

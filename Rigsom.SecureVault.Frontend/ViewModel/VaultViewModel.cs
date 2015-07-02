@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Prism.Commands;
 using Rigsom.SecureVault.Frontend.Model;
+using Rigsom.SecureVault.Frontend.View;
 using Rigsom.SecureVault.Model.Util;
 using System;
 using System.Collections.Generic;
@@ -118,12 +119,12 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
             //Check if password is correct
             if (hashHelper.ComputeHash(secureStringHelper.SecureStringToString(this.Password)).Equals(configHelper.GetPasswordHash()))
             {
-                IEnumerable<Tuple<string, string>> savedData = configHelper.GetAllSavedData();
+                IEnumerable<Tuple<string, string, string>> savedData = configHelper.GetAllSavedData();
                 ObservableCollection<SavedData> dataCollection = new ObservableCollection<SavedData>();
 
                 foreach (var data in savedData)
                 {
-                    dataCollection.Add(new SavedData() { Name = data.Item1, EncryptedValue = data.Item2 });
+                    dataCollection.Add(new SavedData() { Name = data.Item1, EncryptedValue = data.Item2, Salt = data.Item3 });
                 }
 
                 this.SavedData = dataCollection;
@@ -161,11 +162,11 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
             KeyHelper keyHelper = new KeyHelper();
             SecureStringHelper secureStringHelper = new SecureStringHelper();
 
+            selectedID = selectedID == -1 ? 0 : selectedID;
+
             byte[] key = keyHelper.DeriveKey(secureStringHelper.SecureStringToString(this.Password), configHelper.GetSalt());
 
-            CryptoHelper cryptoHelper = new CryptoHelper(key, Convert.FromBase64String(configHelper.GetSalt()));
-
-            selectedID = selectedID == -1 ? 0 : selectedID;
+            CryptoHelper cryptoHelper = new CryptoHelper(key, Convert.FromBase64String(this.SavedData[selectedID.Value].Salt));
 
             string decryptedValue = cryptoHelper.DecryptValue(this.SavedData[selectedID.Value].EncryptedValue);
 
@@ -195,15 +196,32 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
             KeyHelper keyHelper = new KeyHelper();
             SecureStringHelper secureStringHelper = new SecureStringHelper();
 
+
+
             byte[] key = keyHelper.DeriveKey(secureStringHelper.SecureStringToString(this.Password), configHelper.GetSalt());
 
-            CryptoHelper cryptoHelper = new CryptoHelper(key, Convert.FromBase64String(configHelper.GetSalt()));
-
-            selectedID = selectedID == -1 ? 0 : selectedID;
+            CryptoHelper cryptoHelper = new CryptoHelper(key, Convert.FromBase64String(this.SavedData[selectedID.Value].Salt));
 
             string decryptedValue = cryptoHelper.DecryptValue(this.SavedData[selectedID.Value].EncryptedValue);
 
             this.DecryptedPassword = decryptedValue;
+        }
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
+        public DelegateCommand AddData
+        {
+            get { return new DelegateCommand(AddDataExcecute); }
+        }
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
+        public void AddDataExcecute()
+        {
+            NewDataView newDataView = new NewDataView(this.Password);
+            newDataView.ShowDialog();
         }
     }
 }
