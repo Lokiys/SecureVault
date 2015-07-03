@@ -1,2 +1,2 @@
 # SecureVault
-Secure location to save password and other highly confidential data.
+Secure location to save passwords and other highly confidential data.
