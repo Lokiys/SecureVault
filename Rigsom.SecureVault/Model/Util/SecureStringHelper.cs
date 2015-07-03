@@ -27,6 +27,10 @@ namespace Rigsom.SecureVault.Model.Util
                 valuePtr = Marshal.SecureStringToGlobalAllocUnicode(value);
                 return Marshal.PtrToStringUni(valuePtr);
             }
+            catch
+            {
+                return null;
+            }
             finally
             {
                 Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
