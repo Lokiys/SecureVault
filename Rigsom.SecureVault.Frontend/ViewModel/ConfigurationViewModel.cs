@@ -77,7 +77,6 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
         /// </summary>
         public void SaveConfigurationExcecute()
         {
-            //TODO: Save path in configuration
             string configurationPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), 
                 "SecureVault", 
                 "settings",
@@ -86,6 +85,13 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
             ConfigurationHelper configHelper = new ConfigurationHelper(configurationPath);
             HashHelper hashHelper = new HashHelper();
             SecureStringHelper secureStringHelper = new SecureStringHelper();
+
+            if (String.IsNullOrWhiteSpace(secureStringHelper.SecureStringToString(this.MasterPassword)) ||
+                String.IsNullOrWhiteSpace(secureStringHelper.SecureStringToString(this.MasterPasswordConfirmation)))
+            {
+                this.Error = "Please set a Password";
+                return;
+            }
 
             //Check if password and confirmation are equal
             if (secureStringHelper.SecureStringToString(this.MasterPassword).Equals(secureStringHelper.SecureStringToString(this.MasterPasswordConfirmation)))

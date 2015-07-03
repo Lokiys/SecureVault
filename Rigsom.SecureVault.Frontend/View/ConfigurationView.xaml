@@ -1,14 +1,15 @@
 ﻿<Window x:Class="Rigsom.SecureVault.Frontend.View.ConfigurationView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Initial Configuration" Height="200" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/Rigsom.SecureVault.Frontend;component/Images/security-icon.png">
+        FocusManager.FocusedElement="{Binding ElementName=MasterPassword}"
+        Title="Initial Configuration" Height="180" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/Rigsom.SecureVault.Frontend;component/Images/security-icon.png">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30px" />
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="30px" />
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="3*" />
+            <RowDefinition Height="25px" />
+            <RowDefinition Height="25px" />
+            <RowDefinition Height="25px" />
+            <RowDefinition Height="25px" />
+            <RowDefinition Height="40px" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
@@ -16,12 +17,12 @@
         </Grid.ColumnDefinitions>
         
         <Label Grid.Row="0" Grid.Column="0">Master Password</Label>
-        <PasswordBox x:Name="MasterPassword" Grid.Row="1" Grid.ColumnSpan="2" PasswordChanged="MasterPassword_PasswordChanged" />
+        <PasswordBox x:Name="MasterPassword" Grid.Row="1" Grid.ColumnSpan="2" Margin="5,0,5,0" PasswordChanged="MasterPassword_PasswordChanged" />
 
         <Label Grid.Row="2" Grid.Column="0">Master Password Confirmation</Label>
-        <Label Grid.Row="2" Grid.Column="1" Content="{Binding Error}" Foreground="Red" FontStyle="Italic" />
-        <PasswordBox x:Name="MasterPasswordConfirmation" Grid.Row="3" Grid.ColumnSpan="2" PasswordChanged="MasterPasswordConfirmation_PasswordChanged" />
+        <PasswordBox x:Name="MasterPasswordConfirmation" Grid.Row="3" Grid.ColumnSpan="2" Margin="5,0,5,0" PasswordChanged="MasterPasswordConfirmation_PasswordChanged" />
 
-        <Button Grid.Row="4" Grid.ColumnSpan="2" Command="{Binding SaveConfiguration}">Save</Button>
+        <Label Grid.Row="4" Grid.Column="0" Content="{Binding Error}" Foreground="Red" FontStyle="Italic" />
+        <Button Grid.Row="4" Grid.Column="1" Height ="25px" Command="{Binding SaveConfiguration}" IsDefault="True" Margin="0,0,5,0">Save</Button>
     </Grid>
 </Window>
