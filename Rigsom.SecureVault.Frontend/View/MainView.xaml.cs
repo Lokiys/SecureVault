@@ -44,20 +44,12 @@ namespace Rigsom.SecureVault.Frontend.View
                 configView.ShowDialog();
             }
 
-            this.DataContext = new VaultViewModel(new Vault());
-        }
+            Vault model = new Vault();
 
-        /// <summary>
-        /// TODO: Comment
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Password_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            if (this.DataContext != null)
-            {
-                ((VaultViewModel)this.DataContext).Password = ((PasswordBox)sender).SecurePassword;
-            }
+            PasswordPage passwordPage = new PasswordPage();
+            passwordPage.DataContext = new PasswordViewModel(model, this.MainFrame);
+
+            this.MainFrame.Navigate(passwordPage);
         }
     }
 }
