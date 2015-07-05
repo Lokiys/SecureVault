@@ -10,6 +10,8 @@ using System.IO;
 using System.Security.Cryptography;
 using Rigsom.SecureVault.Model.Util;
 using System.Windows;
+using System.Windows.Controls;
+using Rigsom.SecureVault.Frontend.View;
 
 namespace Rigsom.SecureVault.Frontend.ViewModel
 {
@@ -26,10 +28,16 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
         /// <summary>
         /// TODO: Comment
         /// </summary>
+        public Frame MainFrame { get; set; }
+
+        /// <summary>
+        /// TODO: Comment
+        /// </summary>
         /// <param name="model"></param>
-        public ConfigurationViewModel(Configuration model)
+        public ConfigurationViewModel(Configuration model, Frame mainFrame)
         {
             this.Model = model;
+            this.MainFrame = mainFrame;
         }
 
         /// <summary>
@@ -103,8 +111,11 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
                 string passwordHash = hashHelper.ComputeHash(secureStringHelper.SecureStringToString(this.MasterPassword));
                 configHelper.SaveMasterPassword(passwordHash);
 
-                //Close the configuration window
-                Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive).Close();
+                //Navigate to PasswordPage
+                PasswordPage passwordPage = new PasswordPage();
+                passwordPage.DataContext = new PasswordViewModel(new Vault(), this.MainFrame);
+
+                this.MainFrame.Navigate(passwordPage);
             }
             else
             {

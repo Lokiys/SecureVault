@@ -40,16 +40,19 @@ namespace Rigsom.SecureVault.Frontend.View
 
             if (!configHelper.CheckConfiguration())
             {
-                ConfigurationView configView = new ConfigurationView();
-                configView.ShowDialog();
+                ConfigurationPage configPage = new ConfigurationPage();
+                configPage.DataContext = new ConfigurationViewModel(new Configuration(), this.MainFrame);
+
+                this.MainFrame.Navigate(configPage);
+
             }
+            else
+            {
+                PasswordPage passwordPage = new PasswordPage();
+                passwordPage.DataContext = new PasswordViewModel(new Vault(), this.MainFrame);
 
-            Vault model = new Vault();
-
-            PasswordPage passwordPage = new PasswordPage();
-            passwordPage.DataContext = new PasswordViewModel(model, this.MainFrame);
-
-            this.MainFrame.Navigate(passwordPage);
+                this.MainFrame.Navigate(passwordPage);
+            }
         }
     }
 }
