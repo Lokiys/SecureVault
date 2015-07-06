@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Rigsom.SecureVault.Frontend.ViewModel
 {
@@ -95,6 +96,9 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
             string encryptedValue = cryptoHelper.EncryptValue(plainPasswordBase64);
 
             configHelper.AddData(this.Name, encryptedValue, Convert.ToBase64String(salt));
+
+            //Close the NewData window
+            Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive).Close();
         }
     }
 }

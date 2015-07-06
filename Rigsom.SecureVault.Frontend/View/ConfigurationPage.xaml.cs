@@ -1,5 +1,4 @@
-﻿using Rigsom.SecureVault.Frontend.Model;
-using Rigsom.SecureVault.Frontend.ViewModel;
+﻿using Rigsom.SecureVault.Frontend.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,39 +11,42 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Rigsom.SecureVault.Frontend.View
 {
     /// <summary>
-    /// Interaktionslogik für ConfigurationView.xaml
+    /// Interaction logic for ConfigurationPage.xaml
     /// </summary>
-    public partial class ConfigurationView : Window
+    public partial class ConfigurationPage : Page
     {
         /// <summary>
         /// TODO: Comment
         /// </summary>
-        public ConfigurationView()
+        public ConfigurationPage()
         {
             InitializeComponent();
-
-            this.DataContext = new ConfigurationViewModel(new Configuration());
         }
 
         /// <summary>
         /// TODO: Comment
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MasterPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (this.DataContext != null)
             {
-                ((ConfigurationViewModel)this.DataContext).MasterPassword = ((PasswordBox)sender).SecurePassword; 
+                ((ConfigurationViewModel)this.DataContext).MasterPassword = ((PasswordBox)sender).SecurePassword;
             }
         }
 
         /// <summary>
         /// TODO: Comment
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MasterPasswordConfirmation_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (this.DataContext != null)

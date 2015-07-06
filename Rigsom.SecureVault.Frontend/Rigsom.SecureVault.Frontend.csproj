@@ -82,10 +82,11 @@
     <Compile Include="Model\Vault.cs" />
     <Compile Include="ViewModel\ConfigurationViewModel.cs" />
     <Compile Include="ViewModel\NewDataViewModel.cs" />
+    <Compile Include="ViewModel\PasswordViewModel.cs" />
     <Compile Include="ViewModel\VaultViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
-    <Compile Include="View\ConfigurationView.xaml.cs">
-      <DependentUpon>ConfigurationView.xaml</DependentUpon>
+    <Compile Include="View\ConfigurationPage.xaml.cs">
+      <DependentUpon>ConfigurationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -97,7 +98,13 @@
     <Compile Include="View\NewDataView.xaml.cs">
       <DependentUpon>NewDataView.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\ConfigurationView.xaml">
+    <Compile Include="View\PasswordPage.xaml.cs">
+      <DependentUpon>PasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VaultPage.xaml.cs">
+      <DependentUpon>VaultPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\ConfigurationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -106,6 +113,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\NewDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PasswordPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VaultPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -149,6 +164,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\security-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\security.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

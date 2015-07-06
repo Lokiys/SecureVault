@@ -1,68 +1,8 @@
 ﻿<Window x:Class="Rigsom.SecureVault.Frontend.View.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:l="clr-namespace:Rigsom.SecureVault.Frontend.Converter"
-        Title="Vault" Height="400" Width="600" Icon="/Rigsom.SecureVault.Frontend;component/Images/security-icon.png">
-    <Window.Resources>
-        <l:BoolToVisibilityConverter x:Key="visibilityConverter" />
-    </Window.Resources>
+        Title="Vault" Height="400" Width="600" Icon="/Rigsom.SecureVault.Frontend;component/Images/security.ico">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30px" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="30px" />
-            <RowDefinition Height="60px" />
-            <RowDefinition Height="30px" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80px" />
-            <ColumnDefinition Width="200px" />
-            <ColumnDefinition Width="50px" />
-            <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
-        
-        <Label Grid.Column="0" Grid.Row="0">Password</Label>
-        <PasswordBox x:Name="Password" Grid.Column="1" Grid.Row="0" PasswordChanged="Password_PasswordChanged" />
-
-        <Button Grid.Column="2" Grid.Row="0" Command="{Binding Authenticate}">OK</Button>
-
-        <ListBox x:Name="SavedDataList" Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding SavedData, Mode=OneWay}" SelectedIndex="0">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="1*" />
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Source="/Rigsom.SecureVault.Frontend;component/Images/Password-Field-icon.png" />
-                        <TextBlock Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" Margin="10,0,0,0" />
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-
-        <Label Grid.Column="0" Grid.Row="2">Actions</Label>
-        
-        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
-
-            <Button Margin="2" Command="{Binding CopyPassword}" Grid.Column="0" Grid.Row="0" IsEnabled="{Binding DecryptionEnabled}" CommandParameter="{Binding ElementName=SavedDataList,Path=SelectedIndex}">Copy Data</Button>
-            <Button Margin="2" Command="{Binding ShowPassword}" Grid.Column="0" Grid.Row="1" IsEnabled="{Binding DecryptionEnabled}" CommandParameter="{Binding ElementName=SavedDataList,Path=SelectedIndex}">Show Data</Button>
-            <Button Margin="2" Grid.Column="1" Grid.Row="0" IsEnabled="{Binding DecryptionEnabled}" CommandParameter="{Binding ElementName=SavedDataList,Path=SelectedIndex}">Delete</Button>
-            <Button Margin="2" Command="{Binding AddData}" Grid.Column="1" Grid.Row="1" IsEnabled="{Binding DecryptionEnabled}">Add</Button>
-        </Grid>
-
-        <TextBox Grid.Column="4" Grid.Row="3" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding DecryptedPassword}" TextAlignment="Center" />
-        
-        <Rectangle Grid.Row="4" Grid.ColumnSpan="4" Fill="Gainsboro" />
-        <Label Grid.Row="4" Grid.Column="3" Content="{Binding Error}" Foreground="Red" HorizontalAlignment="Right" />
-        <Label Grid.Row="4" Grid.Column="3" Visibility="{Binding DecryptionEnabled, Converter={StaticResource visibilityConverter}}" Foreground="Green" HorizontalAlignment="Right" Content="Ready" />
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" />
     </Grid>
 </Window>

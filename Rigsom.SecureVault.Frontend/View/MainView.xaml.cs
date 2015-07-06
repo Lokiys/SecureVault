@@ -40,23 +40,18 @@ namespace Rigsom.SecureVault.Frontend.View
 
             if (!configHelper.CheckConfiguration())
             {
-                ConfigurationView configView = new ConfigurationView();
-                configView.ShowDialog();
+                ConfigurationPage configPage = new ConfigurationPage();
+                configPage.DataContext = new ConfigurationViewModel(new Configuration(), this.MainFrame);
+
+                this.MainFrame.Navigate(configPage);
+
             }
-
-            this.DataContext = new VaultViewModel(new Vault());
-        }
-
-        /// <summary>
-        /// TODO: Comment
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Password_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            if (this.DataContext != null)
+            else
             {
-                ((VaultViewModel)this.DataContext).Password = ((PasswordBox)sender).SecurePassword;
+                PasswordPage passwordPage = new PasswordPage();
+                passwordPage.DataContext = new PasswordViewModel(new Vault(), this.MainFrame);
+
+                this.MainFrame.Navigate(passwordPage);
             }
         }
     }

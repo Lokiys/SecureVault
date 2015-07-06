@@ -54,20 +54,6 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
         /// <summary>
         /// TODO: Comment
         /// </summary>
-        private string error;
-
-        /// <summary>
-        /// TODO: Comment
-        /// </summary>
-        public string Error
-        {
-            get { return error; }
-            set { error = value; NotifyPropertyChanged(); }
-        }
-
-        /// <summary>
-        /// TODO: Comment
-        /// </summary>
         private string decryptedPassword;
 
         /// <summary>
@@ -77,66 +63,6 @@ namespace Rigsom.SecureVault.Frontend.ViewModel
         {
             get { return decryptedPassword; }
             set { decryptedPassword = value; NotifyPropertyChanged(); }
-        }
-
-        /// <summary>
-        /// TODO: Comment
-        /// </summary>
-        private bool decryptionEnabled;
-
-        /// <summary>
-        /// TODO: Comment
-        /// </summary>
-        public bool DecryptionEnabled
-        {
-            get { return decryptionEnabled; }
-            set { decryptionEnabled = value; NotifyPropertyChanged(); }
-        }
-
-        /// <summary>
-        /// TODO: Comment
-        /// </summary>
-        public DelegateCommand Authenticate
-        {
-            get { return new DelegateCommand(AuthenticateExcecute); }
-        }
-
-        /// <summary>
-        /// TODO: Comment
-        /// </summary>
-        public void AuthenticateExcecute()
-        {
-            //TODO: Save path in configuration
-            string configurationPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                "SecureVault",
-                "settings",
-                "configuration.dat");
-
-            ConfigurationHelper configHelper = new ConfigurationHelper(configurationPath);
-            HashHelper hashHelper = new HashHelper();
-            SecureStringHelper secureStringHelper = new SecureStringHelper();
-
-            //Check if password is correct
-            if (hashHelper.ComputeHash(secureStringHelper.SecureStringToString(this.Password)).Equals(configHelper.GetPasswordHash()))
-            {
-                IEnumerable<Tuple<string, string, string>> savedData = configHelper.GetAllSavedData();
-                ObservableCollection<SavedData> dataCollection = new ObservableCollection<SavedData>();
-
-                foreach (var data in savedData)
-                {
-                    dataCollection.Add(new SavedData() { Name = data.Item1, EncryptedValue = data.Item2, Salt = data.Item3 });
-                }
-
-                this.SavedData = dataCollection;
-                this.Error = String.Empty;
-                this.DecryptionEnabled = true;
-            }
-            else
-            {
-                this.Error = "Invalid Password";
-                this.SavedData = null;
-                this.DecryptionEnabled = false;
-            }
         }
 
         /// <summary>
