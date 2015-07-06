@@ -163,9 +163,6 @@
     <Resource Include="Images\Password-Field-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\security-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\security.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
