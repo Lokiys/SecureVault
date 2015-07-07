@@ -61,6 +61,7 @@ namespace Rigsom.SecureVault.Frontend.View
 
         private void MainFrame_ContentRendered(object sender, EventArgs e)
         {
+            this.MainFrame.Visibility = System.Windows.Visibility.Hidden;
             Storyboard storyboard = new Storyboard();
             DoubleAnimation transAnimation = new DoubleAnimation();
             transAnimation.Duration = TimeSpan.FromMilliseconds(500);
@@ -76,6 +77,7 @@ namespace Rigsom.SecureVault.Frontend.View
 
         void storyboard_Completed(object sender, EventArgs e)
         {
+            this.MainFrame.Visibility = System.Windows.Visibility.Visible;
             Storyboard storyboard = new Storyboard();
             DoubleAnimation growAnimation = new DoubleAnimation();
             growAnimation.Duration = TimeSpan.FromMilliseconds(500);
